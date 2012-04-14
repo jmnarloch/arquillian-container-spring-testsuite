@@ -18,51 +18,40 @@ package org.jboss.arquillian.spring.testsuite.test;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.spring.annotations.SpringConfiguration;
 import org.jboss.arquillian.spring.testsuite.beans.Employee;
 import org.jboss.arquillian.spring.testsuite.beans.repository.EmployeeRepository;
 import org.jboss.arquillian.spring.testsuite.beans.repository.impl.DefaultEmployeeRepository;
 import org.jboss.arquillian.spring.testsuite.beans.repository.impl.NullEmployeeRepository;
+import org.jboss.arquillian.spring.testsuite.beans.service.EmployeeService;
+import org.jboss.arquillian.spring.testsuite.beans.service.impl.DefaultEmployeeService;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
- * Tests the {@link DefaultEmployeeRepository} class.
+ * Tests the {@link DefaultEmployeeService} class.
  *
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */
 @RunWith(Arquillian.class)
-@SpringConfiguration({"applicationContext.xml"})
-public class DefaultEmployeeRepositoryTestCase {
+public class NoConfigurationTestCase {
 
     @Deployment
     public static JavaArchive createTestArchive() {
         return ShrinkWrap.create(JavaArchive.class, "spring-test.jar")
                 .addClasses(Employee.class,
-                        EmployeeRepository.class, DefaultEmployeeRepository.class, NullEmployeeRepository.class)
-                .addAsResource(DefaultEmployeeRepositoryTestCase.class.getResource("/applicationContext.xml"),
-                        "applicationContext.xml");
+                        EmployeeService.class, DefaultEmployeeService.class,
+                        EmployeeRepository.class, DefaultEmployeeRepository.class, NullEmployeeRepository.class);
     }
 
-    @Autowired
-    @Qualifier("defaultEmployeeRepository")
-    private EmployeeRepository employeeRepository;
+    private EmployeeService employeeService;
 
     @Test
     public void testGetEmployees() throws Exception {
 
-        List<Employee> result = employeeRepository.getEmployees();
-
-        assertNotNull("Method returned null list as result.", result);
-        assertEquals("Two employees were expected.", 2, result.size());
+        assertNull("The service was expected to be null.", employeeService);
     }
 }
