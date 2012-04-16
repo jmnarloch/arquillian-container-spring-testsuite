@@ -65,8 +65,7 @@ public class EmployeeControlerTestCase {
                         EmployeeController.class)
                 .addAsLibraries(springDependencies())
                 .addAsLibraries(mockitoDependencies())
-                .addAsWebInfResource(EmployeeControlerTestCase.class.getResource("/mvc/web.xml"),
-                        "web.xml")
+                .addAsWebInfResource(EmployeeControlerTestCase.class.getResource("/mvc/web.xml"), "web.xml")
                 .addAsWebInfResource(EmployeeControlerTestCase.class.getResource("/mvc/employee-servlet.xml"),
                         "employee-servlet.xml")
                 .addAsWebInfResource(EmployeeControlerTestCase.class.getResource("/mvc/applicationContext.xml"),
