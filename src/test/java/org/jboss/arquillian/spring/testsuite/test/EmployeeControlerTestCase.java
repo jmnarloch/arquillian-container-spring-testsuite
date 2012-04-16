@@ -52,10 +52,11 @@ import static org.mockito.Mockito.verify;
  * Tests the {@link EmployeeController} class.
  */
 @RunWith(Arquillian.class)
-@SpringWebConfiguration
+@SpringWebConfiguration(servletName = "employee")
 public class EmployeeControlerTestCase {
 
     @Deployment
+    @OverProtocol("Servlet 3.0")
     public static WebArchive createTestArchive() {
         return ShrinkWrap.create(WebArchive.class, "spring-test.war")
                 .addClasses(Employee.class,
