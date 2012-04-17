@@ -16,7 +16,7 @@
  */
 package org.jboss.arquillian.spring.testsuite.beans.repository;
 
-import org.jboss.arquillian.spring.testsuite.beans.Employee;
+import org.jboss.arquillian.spring.testsuite.beans.model.Employee;
 
 import java.util.List;
 

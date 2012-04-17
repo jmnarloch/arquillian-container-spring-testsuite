@@ -16,7 +16,7 @@
  */
 package org.jboss.arquillian.spring.testsuite.beans.service.impl;
 
-import org.jboss.arquillian.spring.testsuite.beans.Employee;
+import org.jboss.arquillian.spring.testsuite.beans.model.Employee;
 import org.jboss.arquillian.spring.testsuite.beans.repository.EmployeeRepository;
 import org.jboss.arquillian.spring.testsuite.beans.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;

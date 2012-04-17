@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.arquillian.spring.testsuite.beans;
+package org.jboss.arquillian.spring.testsuite.beans.config;
 
 import org.jboss.arquillian.spring.testsuite.beans.repository.EmployeeRepository;
 import org.jboss.arquillian.spring.testsuite.beans.repository.impl.DefaultEmployeeRepository;
@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Represents application Java-based config class.
+ * <p>Represents application Java-based config class.</p>
  *
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */
@@ -32,7 +32,7 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
 
     /**
-     * Creates new instance of {@link EmployeeRepository} class.
+     * <p>Creates new instance of {@link EmployeeRepository} class.</p>
      *
      * @return new instance of {@link EmployeeRepository} class
      */
@@ -43,7 +43,7 @@ public class AppConfig {
     }
 
     /**
-     * Creates new instance of {@link EmployeeService} class.
+     * <p>Creates new instance of {@link EmployeeService} class.</p>
      *
      * @return new instance of {@link EmployeeService} class
      */
