@@ -50,8 +50,8 @@ import static org.mockito.Mockito.verify;
  * <p>Tests the {@link EmployeeController} class.</p>
  */
 @RunWith(Arquillian.class)
-@SpringWebConfiguration(servletName = "employee")
-public class EmployeeControlerTestCase {
+@SpringWebConfiguration
+public class EmployeeControllerContextTestCase {
 
     @Deployment
     @OverProtocol("Servlet 3.0")
@@ -64,9 +64,9 @@ public class EmployeeControlerTestCase {
                 .addAsLibraries(springDependencies())
                 .addAsLibraries(mockitoDependencies())
                 .addAsWebInfResource(EmployeeControlerTestCase.class.getResource("/mvc/web.xml"), "web.xml")
-                .addAsWebInfResource(EmployeeControlerTestCase.class.getResource("/mvc/mvc-applicationContext.xml"),
-                        "employee-servlet.xml")
                 .addAsWebInfResource(EmployeeControlerTestCase.class.getResource("/mvc/empty.xml"),
+                        "employee-servlet.xml")
+                .addAsWebInfResource(EmployeeControlerTestCase.class.getResource("/mvc/mvc-applicationContext.xml"),
                         "applicationContext.xml");
     }
 

@@ -27,27 +27,28 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 /**
- * <p>An instance of {@link WebApplicationInitializer} for initializing the web application.</p>
+ * <p>An instance of {@link org.springframework.web.WebApplicationInitializer} for initializing the web
+ * application.</p>
  *
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */
-public class EmployeeWebInitializer implements WebApplicationInitializer {
+public class EmployeeWebRootInitializer implements WebApplicationInitializer {
 
     /**
      * {@inheritDoc}
      */
     public void onStartup(ServletContext servletContext) throws ServletException {
 
-        // creates the web app context
-        AnnotationConfigWebApplicationContext webContext = new AnnotationConfigWebApplicationContext();
-        webContext.register(WebAppConfig.class);
+        // creates the web root app context
+        AnnotationConfigWebApplicationContext webRootContext = new AnnotationConfigWebApplicationContext();
+        webRootContext.register(WebAppConfig.class);
 
         // registers context load listener
-        servletContext.addListener(new ContextLoaderListener(new AnnotationConfigWebApplicationContext()));
+        servletContext.addListener(new ContextLoaderListener(webRootContext));
 
         // adds a dispatch servlet, the servlet will be configured from root web app context
         ServletRegistration.Dynamic servletConfig = servletContext.addServlet("employee",
-                new DispatcherServlet(webContext));
+                new DispatcherServlet(new AnnotationConfigWebApplicationContext()));
         servletConfig.setLoadOnStartup(1);
         servletConfig.addMapping("*.htm");
     }

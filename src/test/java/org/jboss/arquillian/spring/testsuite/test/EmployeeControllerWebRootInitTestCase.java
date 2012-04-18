@@ -20,6 +20,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OverProtocol;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.spring.annotations.SpringWebConfiguration;
+import org.jboss.arquillian.spring.testsuite.beans.config.WebAppConfig;
 import org.jboss.arquillian.spring.testsuite.beans.controller.EmployeeController;
 import org.jboss.arquillian.spring.testsuite.beans.model.Employee;
 import org.jboss.arquillian.spring.testsuite.beans.repository.EmployeeRepository;
@@ -27,6 +28,7 @@ import org.jboss.arquillian.spring.testsuite.beans.repository.impl.DefaultEmploy
 import org.jboss.arquillian.spring.testsuite.beans.repository.impl.NullEmployeeRepository;
 import org.jboss.arquillian.spring.testsuite.beans.service.EmployeeService;
 import org.jboss.arquillian.spring.testsuite.beans.service.impl.DefaultEmployeeService;
+import org.jboss.arquillian.spring.testsuite.beans.web.EmployeeWebRootInitializer;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
@@ -50,8 +52,8 @@ import static org.mockito.Mockito.verify;
  * <p>Tests the {@link EmployeeController} class.</p>
  */
 @RunWith(Arquillian.class)
-@SpringWebConfiguration(servletName = "employee")
-public class EmployeeControlerTestCase {
+@SpringWebConfiguration
+public class EmployeeControllerWebRootInitTestCase {
 
     @Deployment
     @OverProtocol("Servlet 3.0")
@@ -60,14 +62,9 @@ public class EmployeeControlerTestCase {
                 .addClasses(Employee.class,
                         EmployeeService.class, DefaultEmployeeService.class,
                         EmployeeRepository.class, DefaultEmployeeRepository.class, NullEmployeeRepository.class,
-                        EmployeeController.class)
+                        EmployeeController.class, WebAppConfig.class, EmployeeWebRootInitializer.class)
                 .addAsLibraries(springDependencies())
-                .addAsLibraries(mockitoDependencies())
-                .addAsWebInfResource(EmployeeControlerTestCase.class.getResource("/mvc/web.xml"), "web.xml")
-                .addAsWebInfResource(EmployeeControlerTestCase.class.getResource("/mvc/mvc-applicationContext.xml"),
-                        "employee-servlet.xml")
-                .addAsWebInfResource(EmployeeControlerTestCase.class.getResource("/mvc/empty.xml"),
-                        "applicationContext.xml");
+                .addAsLibraries(mockitoDependencies());
     }
 
     /**
