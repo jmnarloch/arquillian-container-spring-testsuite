@@ -18,6 +18,7 @@ package org.jboss.arquillian.spring.testsuite.test;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.spring.annotations.SpringAnnotatedConfiguration;
 import org.jboss.arquillian.spring.annotations.SpringConfiguration;
 import org.jboss.arquillian.spring.testsuite.beans.config.AppConfig;
 import org.jboss.arquillian.spring.testsuite.beans.model.Employee;
@@ -43,7 +44,7 @@ import static org.junit.Assert.assertNotNull;
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */
 @RunWith(Arquillian.class)
-@SpringConfiguration(classes = {AppConfig.class})
+@SpringAnnotatedConfiguration(classes = {AppConfig.class})
 public class AnnotatedConfigurationTestCase {
 
     @Deployment

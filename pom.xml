@@ -245,6 +245,18 @@
 
     <profiles>
         <profile>
+            <id>jbossas-remote-7</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.as</groupId>
+                    <artifactId>jboss-as-arquillian-container-remote</artifactId>
+                    <version>7.0.0.Final</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
             <id>jbossas-remote-6</id>
             <dependencies>
                 <dependency>

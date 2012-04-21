@@ -42,7 +42,7 @@ import static org.junit.Assert.assertNotNull;
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */
 @RunWith(Arquillian.class)
-@SpringConfiguration(locations = {"service.xml", "repository.xml"})
+@SpringConfiguration(value = {"service.xml", "repository.xml"})
 public class XmlConfigurationTestCase {
 
     @Deployment
