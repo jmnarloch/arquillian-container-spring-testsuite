@@ -35,7 +35,7 @@ import java.util.List;
 import static org.junit.Assert.assertNull;
 
 /**
- * Tests the {@link NullEmployeeRepository} class.
+ * <p>Tests the {@link NullEmployeeRepository} class.</p>
  *
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */

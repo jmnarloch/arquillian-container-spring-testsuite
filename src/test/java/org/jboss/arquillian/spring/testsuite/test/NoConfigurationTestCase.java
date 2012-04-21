@@ -32,7 +32,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.assertNull;
 
 /**
- * Tests the {@link DefaultEmployeeService} class.
+ * <p>Tests the {@link DefaultEmployeeService} class.</p>
  *
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */

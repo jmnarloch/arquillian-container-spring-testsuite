@@ -34,7 +34,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.junit.Assert.assertNull;
 
 /**
- * Tests the {@link DefaultEmployeeRepository} class.
+ * <p>Tests the {@link DefaultEmployeeRepository} class.</p>
  *
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */
