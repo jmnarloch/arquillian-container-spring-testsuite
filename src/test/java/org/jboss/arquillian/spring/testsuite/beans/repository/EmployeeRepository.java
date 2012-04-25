@@ -21,14 +21,14 @@ import org.jboss.arquillian.spring.testsuite.beans.model.Employee;
 import java.util.List;
 
 /**
- * Represents an employee repository.
+ * <p>Represents an employee repository.</p>
  *
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */
 public interface EmployeeRepository {
 
     /**
-     * Retrieves all employees.
+     * <p>Retrieves all employees.</p>
      *
      * @return list of employees
      */

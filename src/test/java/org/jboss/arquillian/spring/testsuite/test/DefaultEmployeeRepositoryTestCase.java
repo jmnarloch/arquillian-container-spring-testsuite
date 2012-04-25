@@ -22,9 +22,7 @@ import org.jboss.arquillian.spring.annotations.SpringConfiguration;
 import org.jboss.arquillian.spring.testsuite.beans.model.Employee;
 import org.jboss.arquillian.spring.testsuite.beans.repository.EmployeeRepository;
 import org.jboss.arquillian.spring.testsuite.beans.repository.impl.DefaultEmployeeRepository;
-import org.jboss.arquillian.spring.testsuite.beans.repository.impl.NullEmployeeRepository;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.api.Archive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,19 +42,27 @@ import static org.junit.Assert.assertNotNull;
 @SpringConfiguration({"applicationContext.xml"})
 public class DefaultEmployeeRepositoryTestCase {
 
+    /**
+     * <p>Creates the test deployment.</p>
+     *
+     * @return the test deployment
+     */
     @Deployment
-    public static JavaArchive createTestArchive() {
-        return ShrinkWrap.create(JavaArchive.class, "spring-test.jar")
-                .addClasses(Employee.class,
-                        EmployeeRepository.class, DefaultEmployeeRepository.class, NullEmployeeRepository.class)
-                .addAsResource(DefaultEmployeeRepositoryTestCase.class.getResource("/applicationContext.xml"),
-                        "applicationContext.xml");
+    public static Archive createTestArchive() {
+
+        return Deployments.createServicesDeployment();
     }
 
+    /**
+     * <p>The injected {@link EmployeeRepository}.</p>
+     */
     @Autowired
     @Qualifier("defaultEmployeeRepository")
     private EmployeeRepository employeeRepository;
 
+    /**
+     * <p>Tests the {@link org.jboss.arquillian.spring.testsuite.beans.service.EmployeeService#getEmployees()}</p>
+     */
     @Test
     public void testGetEmployees() throws Exception {
 

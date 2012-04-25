@@ -17,26 +17,26 @@
 package org.jboss.arquillian.spring.testsuite.beans.model;
 
 /**
- * POJO representing an employee.
+ * <p>POJO representing an employee.</p>
  *
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */
 public class Employee {
 
     /**
-     * Represents the employee name.
+     * <p>Represents the employee name.</p>
      */
     private String name;
 
     /**
-     * Creates new instance of {@link Employee} class.
+     * <p>Creates new instance of {@link Employee} class.</p>
      */
     public Employee() {
         // empty constructor
     }
 
     /**
-     * Retrieves the employee name.
+     * <p>Retrieves the employee name.</p>
      *
      * @return the employee name
      */
@@ -45,7 +45,7 @@ public class Employee {
     }
 
     /**
-     * Sets the employee name.
+     * <p>Sets the employee name.</p>
      *
      * @param name the employee name
      */

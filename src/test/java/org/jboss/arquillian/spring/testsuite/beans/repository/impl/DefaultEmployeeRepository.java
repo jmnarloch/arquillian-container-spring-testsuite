@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The default implementation of {@link EmployeeRepository}.
+ * <p>The default implementation of {@link EmployeeRepository}.</p>
  *
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */
@@ -37,6 +37,9 @@ public class DefaultEmployeeRepository implements EmployeeRepository {
      */
     private List<Employee> employees = new ArrayList<Employee>();
 
+    /**
+     * <p>Initializes the bean.</p>
+     */
     @PostConstruct
     private void init() {
 

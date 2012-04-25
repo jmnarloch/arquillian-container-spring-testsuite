@@ -21,23 +21,13 @@ import org.jboss.arquillian.container.test.api.OverProtocol;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.spring.annotations.SpringWebConfiguration;
 import org.jboss.arquillian.spring.testsuite.beans.controller.EmployeeController;
-import org.jboss.arquillian.spring.testsuite.beans.model.Employee;
-import org.jboss.arquillian.spring.testsuite.beans.repository.EmployeeRepository;
-import org.jboss.arquillian.spring.testsuite.beans.repository.impl.DefaultEmployeeRepository;
-import org.jboss.arquillian.spring.testsuite.beans.repository.impl.NullEmployeeRepository;
-import org.jboss.arquillian.spring.testsuite.beans.service.EmployeeService;
-import org.jboss.arquillian.spring.testsuite.beans.service.impl.DefaultEmployeeService;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
-import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
+import org.jboss.shrinkwrap.api.Archive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
-import java.io.File;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -53,16 +43,15 @@ import static org.mockito.Mockito.verify;
 @SpringWebConfiguration(servletName = "employee")
 public class EmployeeControlerTestCase {
 
+    /**
+     * <p>Creates the test deployment.</p>
+     *
+     * @return the test deployment
+     */
     @Deployment
     @OverProtocol("Servlet 3.0")
-    public static WebArchive createTestArchive() {
-        return ShrinkWrap.create(WebArchive.class, "spring-test.war")
-                .addClasses(Employee.class,
-                        EmployeeService.class, DefaultEmployeeService.class,
-                        EmployeeRepository.class, DefaultEmployeeRepository.class, NullEmployeeRepository.class,
-                        EmployeeController.class)
-                .addAsLibraries(springDependencies())
-                .addAsLibraries(mockitoDependencies())
+    public static Archive createTestArchive() {
+        return Deployments.createWebApplication()
                 .addAsWebInfResource(EmployeeControlerTestCase.class.getResource("/mvc/web.xml"), "web.xml")
                 .addAsWebInfResource(EmployeeControlerTestCase.class.getResource("/mvc/mvc-applicationContext.xml"),
                         "employee-servlet.xml")
@@ -71,13 +60,13 @@ public class EmployeeControlerTestCase {
     }
 
     /**
-     * The injected {@link EmployeeController}.
+     * <p>The injected {@link EmployeeController}.</p>
      */
     @Autowired
     private EmployeeController employeeController;
 
     /**
-     * Tests {@link EmployeeController#getEmployees(org.springframework.ui.Model)} method.
+     * <p>Tests {@link EmployeeController#getEmployees(org.springframework.ui.Model)} method.</p>
      */
     @Test
     public void testGetEmployees() {
@@ -96,38 +85,5 @@ public class EmployeeControlerTestCase {
         verify(model).addAttribute(eq("employees"), argument.capture());
         assertEquals("The controller returned invalid view name, 'employeeList' was expected.", "employeeList", result);
         assertEquals("Two employees should be returned from model.", 2, argument.getValue().size());
-    }
-
-    /**
-     * Retrieves spring mvc dependencies.
-     *
-     * @return spring mvc dependencies
-     */
-    private static File[] springDependencies() {
-        return resolveArtifact("org.springframework:spring-webmvc");
-    }
-
-    /**
-     * Retrieves mockito dependencies.
-     *
-     * @return mockito dependencies
-     */
-    private static File[] mockitoDependencies() {
-        return resolveArtifact("org.mockito:mockito-all");
-    }
-
-    /**
-     * Resolves the given artifact by it's name with help of maven build system.
-     *
-     * @param artifact the fully qualified artifact name
-     *
-     * @return the resolved files
-     */
-    private static File[] resolveArtifact(String artifact) {
-        MavenDependencyResolver mvnResolver = DependencyResolvers.use(MavenDependencyResolver.class);
-
-        mvnResolver.loadMetadataFromPom("pom.xml");
-
-        return mvnResolver.artifacts(artifact).resolveAsFiles();
     }
 }

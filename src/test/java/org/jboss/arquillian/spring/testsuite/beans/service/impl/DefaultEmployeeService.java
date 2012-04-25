@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Default employee service.
+ * <p>Default employee service.</p>
  *
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */

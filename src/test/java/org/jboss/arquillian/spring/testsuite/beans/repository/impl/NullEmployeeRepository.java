@@ -23,7 +23,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * A {@code null} repository.
+ * <p>A {@code null} repository.</p>
  *
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */

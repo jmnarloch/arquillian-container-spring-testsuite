@@ -20,13 +20,9 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.spring.annotations.SpringConfiguration;
 import org.jboss.arquillian.spring.testsuite.beans.model.Employee;
-import org.jboss.arquillian.spring.testsuite.beans.repository.EmployeeRepository;
-import org.jboss.arquillian.spring.testsuite.beans.repository.impl.DefaultEmployeeRepository;
-import org.jboss.arquillian.spring.testsuite.beans.repository.impl.NullEmployeeRepository;
 import org.jboss.arquillian.spring.testsuite.beans.service.EmployeeService;
 import org.jboss.arquillian.spring.testsuite.beans.service.impl.DefaultEmployeeService;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.api.Archive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,19 +41,26 @@ import static org.junit.Assert.assertNotNull;
 @SpringConfiguration({"applicationContext.xml"})
 public class DefaultEmployeeServiceTestCase {
 
+    /**
+     * <p>Creates the test deployment.</p>
+     *
+     * @return the test deployment
+     */
     @Deployment
-    public static JavaArchive createTestArchive() {
-        return ShrinkWrap.create(JavaArchive.class, "spring-test.jar")
-                .addClasses(Employee.class,
-                        EmployeeService.class, DefaultEmployeeService.class,
-                        EmployeeRepository.class, DefaultEmployeeRepository.class, NullEmployeeRepository.class)
-                .addAsResource(DefaultEmployeeServiceTestCase.class.getResource("/applicationContext.xml"),
-                        "applicationContext.xml");
+    public static Archive createTestArchive() {
+
+        return Deployments.createServicesDeployment();
     }
 
+    /**
+     * <p>The injected {@link EmployeeService}.</p>
+     */
     @Autowired
     private EmployeeService employeeService;
 
+    /**
+     * <p>Tests the {@link EmployeeService#getEmployees()}</p>
+     */
     @Test
     public void testGetEmployees() throws Exception {
 

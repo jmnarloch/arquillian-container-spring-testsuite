@@ -23,7 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * An employee controller.
+ * <p>An employee controller.</p>
  *
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */
@@ -34,7 +34,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     /**
-     * Handles request to the employee list.
+     * <p>Handles request to the employee list.</p>
      *
      * @param model the employee list
      *

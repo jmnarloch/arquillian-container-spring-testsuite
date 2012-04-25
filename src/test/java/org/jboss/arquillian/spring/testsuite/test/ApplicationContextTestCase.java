@@ -19,27 +19,22 @@ package org.jboss.arquillian.spring.testsuite.test;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.spring.annotations.SpringConfiguration;
-import org.jboss.arquillian.spring.testsuite.beans.model.Employee;
-import org.jboss.arquillian.spring.testsuite.beans.service.EmployeeService;
-import org.jboss.arquillian.spring.testsuite.beans.service.impl.DefaultEmployeeService;
 import org.jboss.shrinkwrap.api.Archive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
- * <p>Tests the {@link DefaultEmployeeService} class.</p>
+ * <p>Tests the injected application context.</p>
  *
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */
 @RunWith(Arquillian.class)
-@SpringConfiguration(value = {"service.xml", "repository.xml"})
-public class XmlConfigurationTestCase {
+@SpringConfiguration({"applicationContext.xml"})
+public class ApplicationContextTestCase {
 
     /**
      * <p>Creates the test deployment.</p>
@@ -49,28 +44,42 @@ public class XmlConfigurationTestCase {
     @Deployment
     public static Archive createTestArchive() {
 
-        return Deployments.createAppDeployment()
-                .addAsResource(XmlConfigurationTestCase.class.getResource("/service.xml"),
-                        "service.xml")
-                .addAsResource(XmlConfigurationTestCase.class.getResource("/repository.xml"),
-                        "repository.xml");
+        return Deployments.createServicesDeployment();
     }
 
     /**
-     * <p>The injected {@link EmployeeService}.</p>
+     * <p>Link the injected {@link ApplicationContext}</p>
      */
     @Autowired
-    private EmployeeService employeeService;
+    private ApplicationContext applicationContext;
 
     /**
-     * <p>Tests the {@link EmployeeService#getEmployees()}</p>
+     * <p>Tests the {@link ApplicationContext}.</p>
      */
     @Test
-    public void testGetEmployees() throws Exception {
+    public void testGetDefaultRepository() {
 
-        List<Employee> result = employeeService.getEmployees();
+        assertNotNull("The bean: defaultEmployeeRepository is missing.",
+                applicationContext.getBean("defaultEmployeeRepository"));
+    }
 
-        assertNotNull("Method returned null list as result.", result);
-        assertEquals("Two employees were expected.", 2, result.size());
+    /**
+     * <p>Tests the {@link ApplicationContext}.</p>
+     */
+    @Test
+    public void testGetNullRepository() {
+
+        assertNotNull("The bean: nullEmployeeRepository is missing.",
+                applicationContext.getBean("nullEmployeeRepository"));
+    }
+
+    /**
+     * <p>Tests the {@link ApplicationContext}.</p>
+     */
+    @Test
+    public void testGetDefaultService() {
+
+        assertNotNull("The bean: defaultEmployeeService is missing.",
+                applicationContext.getBean("defaultEmployeeService"));
     }
 }

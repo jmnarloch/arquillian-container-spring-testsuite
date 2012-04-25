@@ -18,14 +18,9 @@ package org.jboss.arquillian.spring.testsuite.test;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.spring.testsuite.beans.model.Employee;
-import org.jboss.arquillian.spring.testsuite.beans.repository.EmployeeRepository;
-import org.jboss.arquillian.spring.testsuite.beans.repository.impl.DefaultEmployeeRepository;
-import org.jboss.arquillian.spring.testsuite.beans.repository.impl.NullEmployeeRepository;
 import org.jboss.arquillian.spring.testsuite.beans.service.EmployeeService;
 import org.jboss.arquillian.spring.testsuite.beans.service.impl.DefaultEmployeeService;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.api.Archive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -39,18 +34,27 @@ import static org.junit.Assert.assertNull;
 @RunWith(Arquillian.class)
 public class NoConfigurationTestCase {
 
+    /**
+     * <p>Creates the test deployment.</p>
+     *
+     * @return the test deployment
+     */
     @Deployment
-    public static JavaArchive createTestArchive() {
-        return ShrinkWrap.create(JavaArchive.class, "spring-test.jar")
-                .addClasses(Employee.class,
-                        EmployeeService.class, DefaultEmployeeService.class,
-                        EmployeeRepository.class, DefaultEmployeeRepository.class, NullEmployeeRepository.class);
+    public static Archive createTestArchive() {
+
+        return Deployments.createAppDeployment();
     }
 
+    /**
+     * <p>{@link EmployeeService}.</p>
+     */
     private EmployeeService employeeService;
 
+    /**
+     * <p>Tests if the {@link EmployeeService} hasn't been injected.</p>
+     */
     @Test
-    public void testGetEmployees() throws Exception {
+    public void testEmployeeServie() throws Exception {
 
         assertNull("The service was expected to be null.", employeeService);
     }

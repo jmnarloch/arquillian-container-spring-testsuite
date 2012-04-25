@@ -19,16 +19,11 @@ package org.jboss.arquillian.spring.testsuite.test;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.spring.annotations.SpringAnnotatedConfiguration;
-import org.jboss.arquillian.spring.annotations.SpringConfiguration;
 import org.jboss.arquillian.spring.testsuite.beans.config.AppConfig;
 import org.jboss.arquillian.spring.testsuite.beans.model.Employee;
-import org.jboss.arquillian.spring.testsuite.beans.repository.EmployeeRepository;
-import org.jboss.arquillian.spring.testsuite.beans.repository.impl.DefaultEmployeeRepository;
-import org.jboss.arquillian.spring.testsuite.beans.repository.impl.NullEmployeeRepository;
 import org.jboss.arquillian.spring.testsuite.beans.service.EmployeeService;
 import org.jboss.arquillian.spring.testsuite.beans.service.impl.DefaultEmployeeService;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.api.Archive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,18 +42,26 @@ import static org.junit.Assert.assertNotNull;
 @SpringAnnotatedConfiguration(classes = {AppConfig.class})
 public class AnnotatedConfigurationTestCase {
 
+    /**
+     * <p>Creates the test deployment.</p>
+     *
+     * @return the test deployment
+     */
     @Deployment
-    public static JavaArchive createTestArchive() {
-        return ShrinkWrap.create(JavaArchive.class, "spring-test.jar")
-                .addClasses(Employee.class,
-                        EmployeeService.class, DefaultEmployeeService.class,
-                        EmployeeRepository.class, DefaultEmployeeRepository.class, NullEmployeeRepository.class,
-                        AppConfig.class);
+    public static Archive createTestArchive() {
+
+        return Deployments.createJavaConfigDeployment();
     }
 
+    /**
+     * <p>The injected {@link EmployeeService}.</p>
+     */
     @Autowired
     private EmployeeService employeeService;
 
+    /**
+     * <p>Tests the {@link EmployeeService#getEmployees()}</p>
+     */
     @Test
     public void testGetEmployees() throws Exception {
 
