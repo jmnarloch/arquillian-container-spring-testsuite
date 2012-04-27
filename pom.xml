@@ -26,6 +26,10 @@
         <maven.compiler.argument.target>1.5</maven.compiler.argument.target>
         <maven.compiler.argument.source>1.5</maven.compiler.argument.source>
 
+        <!-- Arquillian version -->
+        <version.arquillian>1.0.0.Final</version.arquillian>
+        <version.arquillian.spring>1.0.0.Final-SNAPSHOT</version.arquillian.spring>
+
         <!-- External Deps -->
         <version.shrinkwrap_shrinkwrap>1.0.0-cr-1</version.shrinkwrap_shrinkwrap>
         <version.shrinkwrap_resolver>1.0.0-beta-5</version.shrinkwrap_resolver>
@@ -83,25 +87,19 @@
             <dependency>
                 <groupId>org.jboss.arquillian.junit</groupId>
                 <artifactId>arquillian-junit-container</artifactId>
-                <version>${project.version}</version>
+                <version>${version.arquillian}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.jboss.arquillian.container</groupId>
                 <artifactId>arquillian-container-spi</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss.arquillian.extension</groupId>
-                <artifactId>arquillian-spring-common</artifactId>
-                <version>${project.version}</version>
+                <version>${version.arquillian}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.jboss.arquillian.extension</groupId>
                 <artifactId>arquillian-spring-3</artifactId>
-                <version>${project.version}</version>
+                <version>${version.arquillian.spring}</version>
             </dependency>
 
             <dependency>
@@ -129,14 +127,6 @@
     <dependencies>
 
         <!-- org.jboss.arquillian -->
-        <dependency>
-            <groupId>org.jboss.spec</groupId>
-            <artifactId>jboss-javaee-6.0</artifactId>
-            <version>1.0.0.Final</version>
-            <type>pom</type>
-            <scope>provided</scope>
-        </dependency>
-
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
@@ -182,6 +172,7 @@
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -252,10 +243,26 @@
             <dependencies>
 
                 <dependency>
+                    <groupId>org.jboss.spec</groupId>
+                    <artifactId>jboss-javaee-6.0</artifactId>
+                    <version>1.0.0.Final</version>
+                    <type>pom</type>
+                    <scope>provided</scope>
+                </dependency>
+
+                <dependency>
                     <groupId>org.jboss.as</groupId>
                     <artifactId>jboss-as-arquillian-container-remote</artifactId>
                     <version>7.1.1.Final</version>
                 </dependency>
+
+                <dependency>
+                    <groupId>org.jboss.arquillian.protocol</groupId>
+                    <artifactId>arquillian-protocol-servlet</artifactId>
+                    <version>${version.arquillian}</version>
+                    <scope>test</scope>
+                </dependency>
+
             </dependencies>
         </profile>
 
@@ -282,7 +289,7 @@
                 <dependency>
                     <groupId>org.jboss.arquillian.container</groupId>
                     <artifactId>arquillian-jbossas-remote-5</artifactId>
-                    <version>1.0.0.Final-SNAPSHOT</version>
+                    <version>1.0.0.CR5</version>
                 </dependency>
                 <dependency>
                     <groupId>org.jboss.jbossas</groupId>
