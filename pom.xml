@@ -94,6 +94,12 @@
 
             <dependency>
                 <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-spring-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
                 <artifactId>arquillian-spring-3</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -240,12 +246,15 @@
     <profiles>
         <profile>
             <id>jbossas-remote-7</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <dependencies>
+
                 <dependency>
                     <groupId>org.jboss.as</groupId>
                     <artifactId>jboss-as-arquillian-container-remote</artifactId>
-                    <version>7.0.0.Final</version>
-                    <scope>test</scope>
+                    <version>7.1.1.Final</version>
                 </dependency>
             </dependencies>
         </profile>
@@ -266,6 +275,23 @@
                 </dependency>
             </dependencies>
         </profile>
+
+        <profile>
+            <id>jbossas-remote-5</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.arquillian.container</groupId>
+                    <artifactId>arquillian-jbossas-remote-5</artifactId>
+                    <version>1.0.0.Final-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.jbossas</groupId>
+                    <artifactId>jboss-as-client</artifactId>
+                    <version>5.0.0.GA</version>
+                    <type>pom</type>
+                </dependency>
+            </dependencies>
+        </profile>
     </profiles>
 
     <repositories>
@@ -280,6 +306,21 @@
             <id>SpringSource Repository</id>
             <name>SpringSource Repository</name>
             <url>http://repo.springsource.org/release</url>
+        </repository>
+
+        <repository>
+            <id>jboss-deprecated-repository</id>
+            <name>JBoss Deprecated Maven Repository</name>
+            <url>https://repository.jboss.org/nexus/content/repositories/deprecated/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
         </repository>
     </repositories>
 
