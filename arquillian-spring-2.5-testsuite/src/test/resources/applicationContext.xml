@@ -7,10 +7,7 @@
 
     <context:annotation-config/>
 
-    <bean name="defaultEmployeeService" class="org.jboss.arquillian.spring.testsuite.beans.service.impl.DefaultEmployeeService"/>
-
-    <bean name="defaultEmployeeRepository" class="org.jboss.arquillian.spring.testsuite.beans.repository.impl.DefaultEmployeeRepository"/>
-
-    <bean name="nullEmployeeRepository" class="org.jboss.arquillian.spring.testsuite.beans.repository.impl.NullEmployeeRepository"/>
+    <context:component-scan base-package="org.jboss.arquillian.spring.testsuite.beans.repository.impl"/>
+    <context:component-scan base-package="org.jboss.arquillian.spring.testsuite.beans.service.impl"/>
 
 </beans>

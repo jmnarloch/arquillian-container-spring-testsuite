@@ -8,6 +8,13 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+    <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>
+            org.jboss.spring.vfs.context.VFSXmlWebApplicationContext
+        </param-value>
+    </context-param>
+
     <servlet>
         <servlet-name>employee</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

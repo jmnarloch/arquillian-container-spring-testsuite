@@ -7,6 +7,6 @@
 
     <context:annotation-config/>
 
-    <bean name="defaultEmployeeService" class="org.jboss.arquillian.spring.testsuite.beans.service.impl.DefaultEmployeeService"/>
+    <context:component-scan base-package="org.jboss.arquillian.spring.testsuite.beans.service.impl"/>
 
 </beans>
