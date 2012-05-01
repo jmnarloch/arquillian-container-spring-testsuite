@@ -1,12 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <!-- Parent -->
-  <parent>
+  <!--<parent>
     <groupId>org.jboss</groupId>
     <artifactId>jboss-parent</artifactId>
     <version>8</version>
     <relativePath />
-  </parent>
+  </parent>-->
 
   <!-- Model Version -->
   <modelVersion>4.0.0</modelVersion>
@@ -14,13 +14,19 @@
   <groupId>org.jboss.arquillian.extension</groupId>
   <artifactId>arquillian-spring-testsuite</artifactId>
   <version>1.0.0.Final-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <name>Test Suite for Arquillian Spring Framework Extension</name>
   <url>http://www.jboss.org</url>
   <description>Test Suite for Spring Framework extension for Arquillian</description>
 
-<!-- Properties -->
+  <!-- Modules -->
+  <modules>
+      <module>arquillian-spring-3-testsuite</module>
+      <module>arquillian-spring-2.5-testsuite</module>
+  </modules>
+
+  <!-- Properties -->
   <properties>
         <!-- jboss-parent override -->
         <maven.compiler.argument.target>1.5</maven.compiler.argument.target>
@@ -44,6 +50,8 @@
         <version.testng_testng>5.14.6</version.testng_testng>
 
         <version.spring_framework>3.1.1.RELEASE</version.spring_framework>
+        <version.spring_framework_3>3.1.1.RELEASE</version.spring_framework_3>
+        <version.spring_framework_2_5>2.5.6</version.spring_framework_2_5>
         <version.cglib>2.2.2</version.cglib>
     </properties>
 
@@ -85,6 +93,13 @@
             </dependency>
 
             <dependency>
+                <groupId>org.jboss.arquillian.protocol</groupId>
+                <artifactId>arquillian-protocol-servlet</artifactId>
+                <version>${version.arquillian}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
                 <groupId>org.jboss.arquillian.junit</groupId>
                 <artifactId>arquillian-junit-container</artifactId>
                 <version>${version.arquillian}</version>
@@ -97,24 +112,6 @@
             </dependency>
 
             <dependency>
-                <groupId>org.jboss.arquillian.extension</groupId>
-                <artifactId>arquillian-spring-3</artifactId>
-                <version>${version.arquillian.spring}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${version.spring_framework}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-webmvc</artifactId>
-                <version>${version.spring_framework}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>cglib</groupId>
                 <artifactId>cglib</artifactId>
                 <version>${version.cglib}</version>
@@ -122,59 +119,6 @@
 
         </dependencies>
     </dependencyManagement>
-
-    <!-- Dependencies -->
-    <dependencies>
-
-        <!-- org.jboss.arquillian -->
-        <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.arquillian.container</groupId>
-            <artifactId>arquillian-container-spi</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.arquillian.extension</groupId>
-            <artifactId>arquillian-spring-3</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 
     <build>
         <plugins>
@@ -234,73 +178,6 @@
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>jbossas-remote-7</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <dependencies>
-
-                <dependency>
-                    <groupId>org.jboss.spec</groupId>
-                    <artifactId>jboss-javaee-6.0</artifactId>
-                    <version>1.0.0.Final</version>
-                    <type>pom</type>
-                    <scope>provided</scope>
-                </dependency>
-
-                <dependency>
-                    <groupId>org.jboss.as</groupId>
-                    <artifactId>jboss-as-arquillian-container-remote</artifactId>
-                    <version>7.1.1.Final</version>
-                </dependency>
-
-                <dependency>
-                    <groupId>org.jboss.arquillian.protocol</groupId>
-                    <artifactId>arquillian-protocol-servlet</artifactId>
-                    <version>${version.arquillian}</version>
-                    <scope>test</scope>
-                </dependency>
-
-            </dependencies>
-        </profile>
-
-        <profile>
-            <id>jbossas-remote-6</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.jboss.arquillian.container</groupId>
-                    <artifactId>arquillian-jbossas-remote-6</artifactId>
-                    <version>1.0.0.CR2</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.jboss.jbossas</groupId>
-                    <artifactId>jboss-as-client</artifactId>
-                    <version>6.0.0.Final</version>
-                    <type>pom</type>
-                </dependency>
-            </dependencies>
-        </profile>
-
-        <profile>
-            <id>jbossas-remote-5</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.jboss.arquillian.container</groupId>
-                    <artifactId>arquillian-jbossas-remote-5</artifactId>
-                    <version>1.0.0.CR5</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.jboss.jbossas</groupId>
-                    <artifactId>jboss-as-client</artifactId>
-                    <version>5.0.0.GA</version>
-                    <type>pom</type>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
-
     <repositories>
 
         <repository>
@@ -316,7 +193,7 @@
         </repository>
 
         <repository>
-            <id>jboss-deprecated-repository</id>
+            <id>JBoss Deprecated Repository</id>
             <name>JBoss Deprecated Maven Repository</name>
             <url>https://repository.jboss.org/nexus/content/repositories/deprecated/</url>
             <layout>default</layout>
