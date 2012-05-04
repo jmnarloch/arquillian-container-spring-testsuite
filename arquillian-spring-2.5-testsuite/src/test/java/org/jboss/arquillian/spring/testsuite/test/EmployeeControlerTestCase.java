@@ -52,11 +52,9 @@ public class EmployeeControlerTestCase {
     @OverProtocol("Servlet 3.0")
     public static Archive createTestArchive() {
         return Deployments.createWebApplication()
-                .addAsWebInfResource(EmployeeControlerTestCase.class.getResource("/mvc/web-servlet.xml"), "web.xml")
-                .addAsWebInfResource(EmployeeControlerTestCase.class.getResource("/mvc/mvc-applicationContext.xml"),
-                        "employee-servlet.xml")
-                .addAsWebInfResource(EmployeeControlerTestCase.class.getResource("/mvc/empty.xml"),
-                        "applicationContext.xml");
+                .addAsWebInfResource("mvc/web-servlet.xml", "web.xml")
+                .addAsWebInfResource("mvc/mvc-applicationContext.xml", "employee-servlet.xml")
+                .addAsWebInfResource("mvc/empty.xml", "applicationContext.xml");
     }
 
     /**

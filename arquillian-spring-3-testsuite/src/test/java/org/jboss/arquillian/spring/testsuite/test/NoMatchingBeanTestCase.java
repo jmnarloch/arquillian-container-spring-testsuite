@@ -45,7 +45,7 @@ public class NoMatchingBeanTestCase {
     @Deployment
     public static Archive createTestArchive() {
         return Deployments.createAppDeployment()
-                .addAsResource(NoMatchingBeanTestCase.class.getResource("/empty.xml"), "empty.xml");
+                .addAsResource("empty.xml");
     }
 
     /**

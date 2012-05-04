@@ -55,7 +55,7 @@ public class Deployments {
     public static JavaArchive createRepositoriesDeployment() {
 
         return createAppDeployment().
-                addAsResource(Deployments.class.getResource("/applicationContext.xml"), "applicationContext.xml");
+                addAsResource("applicationContext.xml");
     }
 
     /**
@@ -66,7 +66,7 @@ public class Deployments {
     public static JavaArchive createServicesDeployment() {
 
         return createAppDeployment().
-                addAsResource(Deployments.class.getResource("/applicationContext.xml"), "applicationContext.xml");
+                addAsResource("applicationContext.xml");
     }
 
 

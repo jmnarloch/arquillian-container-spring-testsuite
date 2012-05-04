@@ -51,10 +51,8 @@ public class XmlConfigurationTestCase {
     public static Archive createTestArchive() {
 
         return Deployments.createAppDeployment()
-                .addAsResource(XmlConfigurationTestCase.class.getResource("/service.xml"),
-                        "service.xml")
-                .addAsResource(XmlConfigurationTestCase.class.getResource("/repository.xml"),
-                        "repository.xml");
+                .addAsResource("service.xml")
+                .addAsResource("repository.xml");
     }
 
     /**
